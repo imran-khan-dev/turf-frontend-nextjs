@@ -5,6 +5,7 @@ import PublicNavbar from "@/components/shared/PublicNavbar";
 import PublicFooter from "@/components/shared/PublicFooter";
 import { Toaster } from "sonner";
 import LoginSuccessToast from "@/components/shared/LoginSuccessToast";
+import LogoutSuccessToast from "@/components/shared/LogoutSuccessToast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
         {children}
         <Toaster position="top-right" richColors />
         <LoginSuccessToast />
+        <LogoutSuccessToast />
         <PublicFooter />
       </body>
     </html>

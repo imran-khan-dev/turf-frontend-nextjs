@@ -13,8 +13,8 @@ export default function LogoutButton({
 
   const handleLogout = async () => {
     try {
-      await logoutUser(role); 
-      router.push("/");
+      await logoutUser(role);
+      router.push("/?loggedOut=true");
     } catch (err) {
       console.error("Logout failed:", err);
     }
