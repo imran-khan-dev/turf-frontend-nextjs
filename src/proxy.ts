@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
   // Turf user slug detection
   const turfSlug = segments.length >= 1 ? segments[0] : null;
 
-  // ---- 1️⃣ Allow public pages immediately ----
+  //  Allow public pages immediately ----
   if (routeOwner === null && !isAuthRoute(pathname)) {
     return NextResponse.next();
   }

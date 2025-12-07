@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+import PublicNavbar from "@/components/shared/PublicNavbar";
+import PublicFooter from "@/components/shared/PublicFooter";
+import { Toaster } from "sonner";
+import LoginSuccessToast from "@/components/shared/LoginSuccessToast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,19 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Turf Booking App",
+  description: "",
 };
 
-const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PublicNavbar />
         {children}
+        <Toaster position="top-right" richColors />
+        <LoginSuccessToast />
+        <PublicFooter />
       </body>
     </html>
   );
-};
-
-export default DashboardLayout;
+}
