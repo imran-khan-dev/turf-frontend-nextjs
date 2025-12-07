@@ -1,24 +1,24 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-// import { getUserFromToken } from "@/lib/auth/getUserFromToken";
 import OwnerSidebar from "@/components/modules/dashboard/sidebar/OwnerSidebar";
 import OwnerNavbar from "@/components/modules/dashboard/navbar/OwnerNavbar";
+import { getCookie } from "@/services/auth/tokenHandlers";
+import { getUserFromToken } from "@/services/auth/getUserFromToken";
 
 export default async function OwnerDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const token = (await cookies()).get("ownerAccess")?.value;
+  const accessToken = await getCookie("ownerAccess");
 
-  if (!token) return redirect("/login");
+  if (!accessToken) {
+    return console.log("No owner found Invalid token");
+  }
 
-  // const user = getUserFromToken(token);
-  const user = "owner";
+  console.log("ownerAccess", accessToken);
 
-  // if (!user || user.role !== "owner") {
-  //   return redirect("/login");
-  // }
+  const user = getUserFromToken(accessToken);
+
+  console.log("userCheck", user);
 
   return (
     <div className="flex h-screen">

@@ -2,40 +2,27 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { logoutUser } from "@/services/auth/logout";
 
-export default function LogoutButton({ role }: { role: string }) {
+export default function LogoutButton({
+  role,
+}: {
+  role: "owner" | "manager" | "turfUser" | "admin";
+}) {
   const router = useRouter();
 
-  const logout = async () => {
-    await fetch(`/api/logout?role=${role}`, { method: "POST" });
-    router.push("/login");
+  const handleLogout = async () => {
+    try {
+      await logoutUser(role); 
+      router.push("/");
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
   };
 
   return (
-    <Button variant="destructive" onClick={logout}>
+    <Button variant="destructive" onClick={handleLogout}>
       Logout
     </Button>
   );
 }
-
-// export default async function UserDashboardLayout({ children }) {
-//   const token = cookies().get("turfUserAccess")?.value;
-
-//   if (!token) return redirect("/login");
-
-//   const user = getUserFromToken(token);
-
-//   if (!user || user.role !== "user") {
-//     return redirect("/login");
-//   }
-
-//   return (
-//     <div className="flex h-screen">
-//       <UserSidebar />
-//       <div className="flex-1">
-//         <UserNavbar user={user} />
-//         <main className="p-6">{children}</main>
-//       </div>
-//     </div>
-//   );
-// }
