@@ -1,4 +1,4 @@
-import { Home, Calendar, Users, DollarSign, Settings, FormInput } from "lucide-react";
+import { Home, Calendar, Users, Settings, FormInput } from "lucide-react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const dashboardConfig: Record<string, any> = {
@@ -10,7 +10,6 @@ export const dashboardConfig: Record<string, any> = {
       { label: "Add Turf Profile", href: "/dashboard/owner/add-turf-profile", icon: FormInput },
       { label: "Update Turf Profile", href: "/dashboard/owner/update-turf-profile", icon: FormInput },
       { label: "Add Turf Field", href: "/dashboard/owner/add-turf-field", icon: FormInput },
-      { label: "Update Turf Field", href: "/dashboard/owner/update-turf-field", icon: FormInput },
 
     ],
   },

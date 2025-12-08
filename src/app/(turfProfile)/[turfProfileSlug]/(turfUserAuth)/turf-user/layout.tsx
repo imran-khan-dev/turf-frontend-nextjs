@@ -1,3 +1,5 @@
+import PublicFooter from "@/components/shared/PublicFooter";
+import PublicNavbar from "@/components/shared/PublicNavbar";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
 
