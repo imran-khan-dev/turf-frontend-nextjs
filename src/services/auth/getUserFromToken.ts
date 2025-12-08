@@ -22,14 +22,14 @@ export function getUserFromToken(token: string): AuthUser | null {
         if (!decoded || typeof decoded === "string") return null;
 
 
-
+        console.log("checkIdUser", decoded)
         return {
             id: decoded.userId,
             email: decoded.email,
             name: decoded.name,
-            phone: decoded.phone? decoded.phone: undefined,
-            photo: decoded.photo? decoded.photo: undefined,
-            role: decoded.role? decoded.role: undefined,
+            phone: decoded.phone ? decoded.phone : undefined,
+            photo: decoded.photo ? decoded.photo : undefined,
+            role: decoded.role ? decoded.role : undefined,
             turfProfileId: decoded.turfProfileId ? decoded.turfProfileId : undefined,
             iat: decoded.iat,
             exp: decoded.exp,

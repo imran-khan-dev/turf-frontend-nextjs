@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
@@ -15,8 +16,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useRouter } from "next/navigation";
 
 interface TurfField {
+  id: any;
   name: string;
   pricePerSlot: number;
   available: boolean;
@@ -24,30 +27,51 @@ interface TurfField {
 }
 
 interface TurfProfile {
+  // Basic Info
+  id: string;
+  name?: string;
+  slug?: string;
+
+  // Contact
   phone: string;
   email: string;
+  whatsappLink: string;
+
+  // Social Links
   facebookLink: string;
   instagramLink: string;
-  whatsappLink: string;
-  name?: string;
+
+  // Media Assets
+  logo?: string;
   heroImage?: string;
+
+  // About Section
   aboutTitle?: string;
-  slug?: string;
   aboutDesc?: string;
   aboutImg?: string;
+
+  // Turf Details
+  openHours?: string;
   turfFields?: TurfField[];
+
+  // Location
   address?: string;
   googleMapLink?: string;
 }
+
 
 interface TurfProfileProps {
   profile: TurfProfile;
 }
 
-export default function TurfProfileHome({ profile }: TurfProfileProps) {
+export default function TurfProfilePublicPage({ profile }: TurfProfileProps) {
   const scrollToTurfFields = () => {
     const section = document.getElementById("turf-fields");
     section?.scrollIntoView({ behavior: "smooth" });
+  };
+  const router = useRouter();
+  const handleBookField = (field: TurfField) => {
+    router.push(`/${profile.slug}/book/${field.id}`);
   };
 
   return (
@@ -124,7 +148,7 @@ export default function TurfProfileHome({ profile }: TurfProfileProps) {
         {profile.heroImage && (
           <Image
             src={profile.heroImage}
-            alt={profile.name}
+            alt={profile.name || "Your Turf Name"}
             fill
             className="object-cover"
           />
@@ -181,7 +205,7 @@ export default function TurfProfileHome({ profile }: TurfProfileProps) {
             {(profile.turfFields || []).map((field, i) => (
               <div
                 key={i}
-                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition"
+                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col"
               >
                 {/* Field Carousel */}
                 <div className="w-full h-48 mb-4 relative">
@@ -212,6 +236,7 @@ export default function TurfProfileHome({ profile }: TurfProfileProps) {
                   )}
                 </div>
 
+                {/* Field Info */}
                 <h3 className="text-xl font-semibold">{field.name}</h3>
 
                 <p className="mt-2 text-gray-600">
@@ -225,6 +250,19 @@ export default function TurfProfileHome({ profile }: TurfProfileProps) {
                 >
                   {field.available ? "Available" : "Booked"}
                 </p>
+
+                {/* Book Button */}
+                <button
+                  disabled={!field.available}
+                  onClick={() => handleBookField(field)}
+                  className={`mt-4 w-full py-2 rounded-lg text-white font-semibold transition ${
+                    field.available
+                      ? "bg-[#1A80E3] hover:bg-blue-700 cursor-pointer"
+                      : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                >
+                  {field.available ? "Book Now" : "Unavailable"}
+                </button>
               </div>
             ))}
           </div>
@@ -234,7 +272,9 @@ export default function TurfProfileHome({ profile }: TurfProfileProps) {
       {/* Contact */}
       <section id="contact" className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-[#1A80E3] mb-8">Contact</h2>
+          <h2 className="text-3xl font-bold text-center text-[#1A80E3] mb-8">
+            Contact
+          </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Address */}

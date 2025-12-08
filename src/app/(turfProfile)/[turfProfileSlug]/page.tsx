@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import TurfHomepage from "@/components/modules/TurfProfilePublicPage/TurfProfilePublicPage";
+import TurfProfilePublicPage from "@/components/modules/TurfProfilePublicPage/TurfProfilePublicPage";
 import serverFetch from "@/lib/server-fetch";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,28 +8,51 @@ interface PageProps {
   params: { turfProfileSlug: string };
 }
 
-// Fallback dummy profile if needed
-const dummyProfile = {
-  name: "Dhanmondi Turf",
-  heroImage: "/hero-turf.jpg",
-  aboutTitle: "About Our Turf",
-  turfProfileSlug: "dhanmondi-turf",
-  aboutDesc:
-    "We provide high-quality turf fields for football, cricket, and other sports. Comfortable seating and professional management ensure the best experience.",
-  aboutImg: "/about-turf.jpg",
-  turfFields: [
-    { name: "Main Field", pricePerSlot: 2000, available: true },
-    { name: "Secondary Field", pricePerSlot: 1500, available: false },
-    { name: "Practice Field", pricePerSlot: 1000, available: true },
-  ],
-  address: "Jhighatola, Dhanmondi, Dhaka",
-  googleMapLink: "https://goo.gl/maps/xyz123",
-};
+interface TurfField {
+  id: any;
+  name: string;
+  pricePerSlot: number;
+  available: boolean;
+  photos?: string[];
+}
+
+interface TurfProfile {
+  // Basic Info
+  id: string;
+  name?: string;
+  slug?: string;
+
+  // Contact
+  phone: string;
+  email: string;
+  whatsappLink: string;
+
+  // Social Links
+  facebookLink: string;
+  instagramLink: string;
+
+  // Media Assets
+  logo?: string;
+  heroImage?: string;
+
+  // About Section
+  aboutTitle?: string;
+  aboutDesc?: string;
+  aboutImg?: string;
+
+  // Turf Details
+  openHours?: string;
+  turfFields?: TurfField[];
+
+  // Location
+  address?: string;
+  googleMapLink?: string;
+}
 
 export default async function Page({ params }: PageProps) {
   const { turfProfileSlug } = await params;
 
-  let profileData: typeof dummyProfile | null = null;
+  let profileData: TurfProfile | null = null;
   let turfFields: any | null = null;
 
   console.log("turfProfileSlug", turfProfileSlug);
@@ -84,7 +107,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <TurfHomepage
+    <TurfProfilePublicPage
       profile={{
         ...profileData,
         turfFields: turfFields?.data || [],
