@@ -7,8 +7,11 @@ export const dashboardConfig: Record<string, any> = {
       { label: "Dashboard", href: "/dashboard/owner/bookings", icon: Home },
       { label: "Bookings", href: "/dashboard/owner/bookings", icon: Calendar },
       { label: "Customers", href: "/dashboard/owner/customers", icon: Users },
-      { label: "Add TurfProfile", href: "/dashboard/owner/add-turf-profile", icon: FormInput },
-      { label: "Update TurfProfile", href: "/dashboard/owner/update-turf-profile", icon: FormInput },
+      { label: "Add Turf Profile", href: "/dashboard/owner/add-turf-profile", icon: FormInput },
+      { label: "Update Turf Profile", href: "/dashboard/owner/update-turf-profile", icon: FormInput },
+      { label: "Add Turf Field", href: "/dashboard/owner/add-turf-field", icon: FormInput },
+      { label: "Update Turf Field", href: "/dashboard/owner/update-turf-field", icon: FormInput },
+
     ],
   },
 
