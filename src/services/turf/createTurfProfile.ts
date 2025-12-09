@@ -68,7 +68,6 @@ export const createTurfProfile = async (_currentState: any, formData: any) => {
         );
 
         const result = await res.json();
-        console.log("Turf profile result:", result);
 
         return result;
     } catch (error) {

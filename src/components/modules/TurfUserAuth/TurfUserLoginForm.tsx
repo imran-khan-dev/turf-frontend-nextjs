@@ -88,7 +88,7 @@ const TurfUserLoginForm = ({
             <FieldDescription className="px-6 text-center">
               Don&apos;t have an account?{" "}
               <a
-                href="owner/register"
+                href={`/${turfProfileSlug}/turf-user/register`}
                 className="text-blue-600 hover:underline"
               >
                 Sign up

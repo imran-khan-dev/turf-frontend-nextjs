@@ -33,21 +33,16 @@ const turfUserlogin = async (_currentState: any, formData: any) => {
       turfProfileSlug,
     });
 
-    console.log("loginBody", body)
-
     // Call backend Turf User login API
     const res = await serverFetch.post("auth/login/turf-user", {
       body,
       headers: { "Content-Type": "application/json" },
     });
 
-    console.log("lognRes", res)
     const result = await res.json();
-    console.log("lognResult", result)
     if (!result.success) {
       throw new Error(result.message || "Login failed");
     }
-    console.log("lognResult1", result)
 
     // Parse Set-Cookie headers
     const setCookieHeaders = res.headers.getSetCookie();

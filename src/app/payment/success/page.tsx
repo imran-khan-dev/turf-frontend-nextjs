@@ -14,22 +14,18 @@ export default function PaymentSuccessPage() {
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  console.log("bookingId", bookingId);
-
   useEffect(() => {
     async function fetchBooking() {
       if (!bookingId) {
         setLoading(false);
         return;
       }
-
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_API_URL}booking/get-booking/${bookingId}`,
           { cache: "no-store" }
         );
         const json = await res.json();
-        console.log("bookingJson", json);
 
         if (json.success) setBooking(json.data);
       } catch (err) {

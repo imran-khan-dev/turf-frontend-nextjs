@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <PublicNavbar />
         {children}
-        <Toaster position="top-right" richColors />
+        <Toaster position="bottom-right" richColors />
         <LogoutSuccessToast/>
         <PublicFooter />
       </body>

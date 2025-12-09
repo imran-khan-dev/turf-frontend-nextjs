@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardShell from "@/components/modules/Dashboard/DashboardShell";
 import { getUserFromToken } from "@/services/auth/getUserFromToken";
 import { getCookie } from "@/services/auth/tokenHandlers";
@@ -16,15 +16,17 @@ function mapRole(tokenRole: string | undefined) {
   return roleMap[tokenRole] ?? null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function DashboardLayout({ children }: any) {
-  const accessToken = await getCookie("ownerAccess");
+export default async function DashboardLayout({ children, params }: any) {
+  const { turfProfileSlug } = await params;
+
+  const accessToken = await getCookie("turfUserAccess");
   const user = accessToken ? getUserFromToken(accessToken) : null;
 
+  console.log("dashboardUser", user);
   const role = mapRole(user?.role);
 
   return (
-    <DashboardShell user={user} role={role}>
+    <DashboardShell user={user} role={role} turfProfileSlug={turfProfileSlug}>
       {children}
     </DashboardShell>
   );

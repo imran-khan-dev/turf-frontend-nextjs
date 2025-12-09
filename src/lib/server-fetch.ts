@@ -14,13 +14,8 @@ const serverFetchHelper = async (
     const { headers, ...restOptions } = options;
 
 
-
-    console.log("tokentype", tokenType)
     // get the correct access token from cookies
     const accessToken = await getCookie(tokenType);
-
-    console.log("chcktoken", accessToken)
-
 
     const response = await fetch(`${BACKEND_API_URL}${endpoint}`, {
         headers: {

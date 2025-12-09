@@ -55,8 +55,6 @@ export default async function Page({ params }: PageProps) {
   let profileData: TurfProfile | null = null;
   let turfFields: any | null = null;
 
-  console.log("turfProfileSlug", turfProfileSlug);
-
   try {
     const res = await serverFetch.get(
       `turf-profile/get-turf-profile/${turfProfileSlug}`
@@ -72,11 +70,10 @@ export default async function Page({ params }: PageProps) {
 
   const trufProfileId = profileData?.id;
 
-  console.log("tpId", trufProfileId);
   try {
     const res = await serverFetch.get(`turf-field/get-fields/${trufProfileId}`);
 
-    console.log("res", res);
+   
     if (res.ok) {
       const json = await res.json();
       turfFields = json;
@@ -85,7 +82,7 @@ export default async function Page({ params }: PageProps) {
     console.error("Error fetching turf fields:", err);
   }
 
-  console.log("pD", turfFields);
+ 
 
   // If profile not found, show friendly 404-like message
   if (!profileData) {

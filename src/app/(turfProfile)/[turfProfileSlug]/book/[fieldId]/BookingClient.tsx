@@ -4,10 +4,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { getCookie } from "@/services/auth/tokenHandlers";
-import Link from "next/link";
 
-export default function BookingClient({ field, turfProfileSlug }: any) {
+
+export default function BookingClient({ field }: any) {
   const router = useRouter();
   const [date, setDate] = useState<string>(""); // YYYY-MM-DD
   const [slots, setSlots] = useState<any[]>([]);
@@ -47,7 +46,7 @@ export default function BookingClient({ field, turfProfileSlug }: any) {
     }
     setError(null);
     setBookingLoading(true);
-    console.log("fieldinBooking", field);
+    
 
     try {
       const body = {
@@ -85,24 +84,6 @@ export default function BookingClient({ field, turfProfileSlug }: any) {
       setBookingLoading(false);
     }
   };
-
-  //   const accessToken = getCookie("turfUserAccess");
-  //   if (!accessToken) {
-  //     return (
-  //       <div className="text-center p-8">
-  //         <p className="mb-4 text-lg">Please login to book a slot</p>
-  //         <Link
-  //           href={`/${turfProfileSlug}/turf-user/login`}
-  //           className="bg-[#1A80E3] hover:bg-blue-700 text-white px-4 py-2 rounded"
-  //         >
-  //           Login
-  //         </Link>
-  //       </div>
-  //     );
-  //   }
-  console.log("clientSlots", slots);
-
-  console.log("seletectSlot", selectedSlot);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">

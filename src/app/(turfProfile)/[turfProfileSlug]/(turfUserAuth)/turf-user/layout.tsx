@@ -11,7 +11,7 @@ export default function TurfUserAuthLayout({
   return (
     <>
       {children}
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
     </>
   );
 }

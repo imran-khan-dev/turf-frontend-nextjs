@@ -32,7 +32,7 @@ export default function RootLayout({
       >
        
         {children}
-        <Toaster position="top-right" richColors />
+        <Toaster position="bottom-right" richColors />
         <LoginSuccessToast />
         <LogoutSuccessToast />
       </body>

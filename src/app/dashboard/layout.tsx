@@ -26,7 +26,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Toaster position="top-right" richColors />
+        <Toaster position="bottom-right" richColors />
         <LoginSuccessToast />
         <LogoutSuccessToast/>
       </body>

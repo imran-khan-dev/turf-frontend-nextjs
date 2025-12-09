@@ -31,7 +31,7 @@ const PublicNavbar = () => {
         </nav>
 
         <div className="hidden md:flex items-center space-x-2">
-          <Link href="owner/login" className="text-lg font-medium">
+          <Link href="/owner/login" className="text-lg font-medium">
             <Button>Login</Button>
           </Link>
         </div>

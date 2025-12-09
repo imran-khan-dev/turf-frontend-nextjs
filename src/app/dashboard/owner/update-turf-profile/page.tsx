@@ -5,8 +5,6 @@ export default async function UpdateTurfProfilePage() {
   const res = await serverFetch.get("user/my-turf-profile", {}, "ownerAccess");
   const data = await res.json();
 
-  console.log("profiledata", data);
-
   const turfProfileId = data?.data?.[0]?.id;
   const turfProfileSlug = data?.data?.[0]?.slug;
 

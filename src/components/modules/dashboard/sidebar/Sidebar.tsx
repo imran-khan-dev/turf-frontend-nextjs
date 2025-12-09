@@ -1,14 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
-import { dashboardConfig } from "@/services/dashboard/dashboardConfig";
+import {
+  dashboardConfig,
+  SidebarItem,
+} from "@/services/dashboard/dashboardConfig";
 import LogoutButton from "../Logout/LogoutButton";
 
-export default function Sidebar({ role, open, setOpen }: any) {
+interface SidebarProps {
+  role: "owner" | "admin" | "turfUser" | null;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  turfProfileSlug?: string | null;
+}
+
+export default function Sidebar({
+  role,
+  open,
+  setOpen,
+  turfProfileSlug,
+}: SidebarProps) {
   if (!role) return null;
 
-  const items = dashboardConfig[role]?.sidebar ?? [];
+  console.log("ProfileSlug", turfProfileSlug)
+
+  let items: SidebarItem[] = [];
+
+  if (role === "turfUser" && turfProfileSlug) {
+    items = dashboardConfig.turfUser(turfProfileSlug).sidebar;
+  } else if (role === "owner" || role === "admin") {
+    items = dashboardConfig[role].sidebar;
+  }
 
   return (
     <>
@@ -30,7 +52,7 @@ export default function Sidebar({ role, open, setOpen }: any) {
           <h2 className="text-xl font-bold mb-6 capitalize">{role} Panel</h2>
 
           <nav className="flex flex-col gap-2">
-            {items.map((item: any) => (
+            {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

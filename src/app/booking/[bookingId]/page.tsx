@@ -1,6 +1,24 @@
-// app/booking/[bookingId]/page.tsx
 import serverFetch from "@/lib/server-fetch";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+async function createPayment(paymentId: string) {
+  "use server";
+
+  const body = JSON.stringify({ paymentId });
+
+  const payNowRes = await serverFetch.post(
+    `payment/make-payment`,
+    {
+      body,
+      headers: { "Content-Type": "application/json" },
+    },
+    "turfUserAccess"
+  );
+
+  const json = await payNowRes.json();
+  return json.url;
+}
 
 export default async function BookingPage({
   params,
@@ -14,25 +32,22 @@ export default async function BookingPage({
   const json = await res.json();
   const booking = json.data;
 
-  const paymentId = booking?.payment?.id;
+  // const paymentId = booking?.payment?.id;
 
-  console.log("pay", paymentId);
+  // const body = JSON.stringify({
+  //   paymentId: paymentId,
+  // });
 
-  const body = JSON.stringify({
-    paymentId: paymentId,
-  });
+  // const payNowRes = await serverFetch.post(
+  //   `payment/make-payment`,
+  //   {
+  //     body,
+  //     headers: { "Content-Type": "application/json" },
+  //   },
+  //   "turfUserAccess"
+  // );
 
-  const payNowRes = await serverFetch.post(
-    `payment/make-payment`,
-    {
-      body,
-      headers: { "Content-Type": "application/json" },
-    },
-    "turfUserAccess"
-  );
-
-  const payNowLink = await payNowRes.json();
-  console.log("payNow", payNowLink.url);
+  // const payNowLink = await payNowRes.json();
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -49,15 +64,22 @@ export default async function BookingPage({
       <p>Amount: {booking.paymentAmount} ৳</p>
 
       {booking.paymentStatus === "PENDING" && (
-        <div className="mt-4">
-          {/* Redirect to your payment gateway using booking.id & amount */}
-          <a
-            href={payNowLink.url}
-            className="inline-block bg-[#1A80E3] text-white px-4 py-2 rounded"
+        <form
+          action={async () => {
+            "use server";
+            const url = await createPayment(booking.payment.id);
+            // Redirect user to gateway after generating URL
+            return redirect(url);
+          }}
+          className="mt-4"
+        >
+          <button
+            type="submit"
+            className="bg-[#1A80E3] text-white px-4 py-2 rounded"
           >
             Pay Now
-          </a>
-        </div>
+          </button>
+        </form>
       )}
     </div>
   );

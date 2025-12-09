@@ -5,14 +5,14 @@ import { useState } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import Navbar from "./Navbar/Navbar";
 
-export default function DashboardShell({ user, role, children }: any) {
+export default function DashboardShell({ user, role, children, turfProfileSlug = null }: any) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="flex h-screen">
       
       {/* Sidebar receives mobile open state */}
-      <Sidebar role={role} open={open} setOpen={setOpen} />
+      <Sidebar role={role} open={open} setOpen={setOpen} turfProfileSlug={turfProfileSlug} />
 
       <div className="flex-1 flex flex-col">
         
