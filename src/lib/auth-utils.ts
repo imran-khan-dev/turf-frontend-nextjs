@@ -10,7 +10,7 @@ export function getRouteOwner(pathname: string): UserRole {
   if (pathname.startsWith("/dashboard/manager")) return "MANAGER";
 
   // turf user dashboard → /{slug}/user-dashboard
-  if (segments.length === 2 && segments[1] === "user-dashboard") {
+  if (segments.length >= 2 && segments[1] === "user-dashboard") {
     return "TURF_USER";
   }
 
