@@ -1,40 +1,25 @@
-"use client";
+"use server";
 
-import { useState } from "react";
+import serverFetch from "@/lib/server-fetch";
+import { redirect } from "next/navigation";
 
-export default function PayButton({ paymentId }: { paymentId: string }) {
-  const [loading, setLoading] = useState(false);
+export async function payNowAction(formData: FormData) {
+  const paymentId = formData.get("paymentId") as string;
 
-  const handlePayNow = async () => {
-    try {
-      setLoading(true);
+  const body = JSON.stringify({ paymentId });
 
-      const res = await fetch("/api/payment/make-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ paymentId }),
-      });
-
-      const data = await res.json();
-
-      // redirect to the PG link
-      window.location.href = data.url;
-    } catch (err) {
-      console.error("Payment failed", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <button
-      onClick={handlePayNow}
-      disabled={loading}
-      className="inline-block bg-[#1A80E3] text-white px-4 py-2 rounded"
-    >
-      {loading ? "Processing..." : "Pay Now"}
-    </button>
+  const res = await serverFetch.post(
+    "payment/make-payment",
+    {
+      body,
+      headers: { "Content-Type": "application/json" },
+    },
+    "turfUserAccess"
   );
+
+  const json = await res.json();
+
+  if (!json?.url) throw new Error("Payment URL missing");
+
+  redirect(json.url);
 }

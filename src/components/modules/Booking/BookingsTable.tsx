@@ -1,7 +1,17 @@
 "use client";
 import { useState, useMemo } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { redirect } from "next/navigation";
+import serverFetch from "@/lib/server-fetch";
+import { payNowAction } from "./PayButton";
 
 interface Booking {
   id: string;
@@ -11,11 +21,13 @@ interface Booking {
   endTime: string;
   paymentAmount: number;
   status: string;
+  paymentId: string | null;
 }
 
 interface Props {
   initialBookings: Booking[];
 }
+
 
 export default function BookingsTable({ initialBookings }: Props) {
   const [statusFilter, setStatusFilter] = useState<string>("ALL");
@@ -32,7 +44,18 @@ export default function BookingsTable({ initialBookings }: Props) {
   }, [initialBookings, statusFilter, minAmount, maxAmount]);
 
   if (!initialBookings || initialBookings.length === 0)
-    return <div className="text-center py-10 text-gray-500 font-medium">No bookings found.</div>;
+    return (
+      <div className="text-center py-10 text-gray-500 font-medium">
+        No bookings found.
+      </div>
+    );
+
+  // const handlePayNow = (paymentId: string) => {
+  //   console.log("Redirect to payment for:", paymentId);
+
+  //   // Example:
+  //   // window.location.href = `/payment/${paymentId}`;
+  // };
 
   return (
     <div>
@@ -53,7 +76,9 @@ export default function BookingsTable({ initialBookings }: Props) {
           type="number"
           placeholder="Min Amount"
           value={minAmount}
-          onChange={(e) => setMinAmount(e.target.value ? Number(e.target.value) : "")}
+          onChange={(e) =>
+            setMinAmount(e.target.value ? Number(e.target.value) : "")
+          }
           className="border p-1 rounded w-24"
         />
 
@@ -61,7 +86,9 @@ export default function BookingsTable({ initialBookings }: Props) {
           type="number"
           placeholder="Max Amount"
           value={maxAmount}
-          onChange={(e) => setMaxAmount(e.target.value ? Number(e.target.value) : "")}
+          onChange={(e) =>
+            setMaxAmount(e.target.value ? Number(e.target.value) : "")
+          }
           className="border p-1 rounded w-24"
         />
       </div>
@@ -75,6 +102,7 @@ export default function BookingsTable({ initialBookings }: Props) {
             <TableHead className="text-white">End</TableHead>
             <TableHead className="text-white">Amount</TableHead>
             <TableHead className="text-white">Status</TableHead>
+            <TableHead className="text-white">Payment</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -83,8 +111,12 @@ export default function BookingsTable({ initialBookings }: Props) {
             <TableRow key={booking.id} className="hover:bg-blue-50 transition">
               <TableCell>{booking.itemName}</TableCell>
               <TableCell>{booking.userName}</TableCell>
-              <TableCell>{new Date(booking.startTime).toLocaleString()}</TableCell>
-              <TableCell>{new Date(booking.endTime).toLocaleString()}</TableCell>
+              <TableCell>
+                {new Date(booking.startTime).toLocaleString()}
+              </TableCell>
+              <TableCell>
+                {new Date(booking.endTime).toLocaleString()}
+              </TableCell>
               <TableCell>{booking.paymentAmount} ৳</TableCell>
               <TableCell>
                 <Badge
@@ -98,6 +130,24 @@ export default function BookingsTable({ initialBookings }: Props) {
                 >
                   {booking.status}
                 </Badge>
+              </TableCell>
+              <TableCell>
+                {booking.status === "PENDING" && booking.paymentId && (
+                  <form action={payNowAction}>
+                    <input
+                      type="hidden"
+                      name="paymentId"
+                      value={booking.paymentId}
+                    />
+
+                    <button
+                      type="submit"
+                      className="bg-[#1A80E3] text-white px-4 py-2 rounded"
+                    >
+                      Pay Now
+                    </button>
+                  </form>
+                )}
               </TableCell>
             </TableRow>
           ))}
