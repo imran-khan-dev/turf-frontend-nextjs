@@ -1,5 +1,4 @@
 import serverFetch from "@/lib/server-fetch";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function createPayment(paymentId: string) {

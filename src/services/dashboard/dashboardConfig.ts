@@ -62,9 +62,10 @@ export const dashboardConfig: DashboardConfigType = {
   admin: {
     sidebar: [
       { label: "Dashboard", href: "/dashboard/admin", icon: Home },
-      { label: "All Turfs", href: "/dashboard/admin/turfs", icon: Calendar },
-      { label: "Users", href: "/dashboard/admin/users", icon: Users },
-      { label: "Settings", href: "/dashboard/admin/settings", icon: Settings },
+      { label: "All Turf Customers", href: "/dashboard/admin/all-turf-users", icon: Users },
+      { label: "All Turf Owners", href: "/dashboard/admin/all-turf-owners", icon: Users },
+      { label: "Add Admin", href: "/dashboard/admin/add-admin", icon: FormInput },
+      { label: "Delete Admin", href: "/dashboard/admin/delete-admin", icon: FormInput },
     ],
   },
 

@@ -1,21 +1,34 @@
-export default async function AdminDashboardLayout({ children }) {
-  const token = cookies().get("adminAccess")?.value;
+import DashboardShell from "@/components/modules/Dashboard/DashboardShell";
+import { getUserFromToken } from "@/services/auth/getUserFromToken";
+import { getCookie } from "@/services/auth/tokenHandlers";
 
-  if (!token) return redirect("/login");
+function mapRole(tokenRole: string | undefined) {
+  if (!tokenRole) return null;
 
-  const user = getUserFromToken(token);
+  const roleMap: Record<string, "owner" | "manager" | "turfUser" | "admin"> = {
+    OWNER: "owner",
+    MANAGER: "manager",
+    ADMIN: "admin",
+    SUPER_ADMIN: "admin",
+    TURF_USER: "turfUser",
+  };
 
-  if (!user || user.role !== "admin") {
-    return redirect("/login");
-  }
+  return roleMap[tokenRole] ?? null;
+}
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function DashboardLayout({ children }: any) {
+  const accessToken = await getCookie("adminAccess");
+  const user = accessToken ? getUserFromToken(accessToken) : null;
+
+  console.log("dashboardUser", user);
+
+  const role = mapRole(user?.role);
+
+  console.log("roleAdmin", role);
   return (
-    <div className="flex h-screen">
-      <AdminSidebar />
-      <div className="flex-1">
-        <AdminNavbar user={user} />
-        <main className="p-6">{children}</main>
-      </div>
-    </div>
+    <DashboardShell user={user} role={role}>
+      {children}
+    </DashboardShell>
   );
 }

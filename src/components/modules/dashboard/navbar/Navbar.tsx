@@ -36,7 +36,10 @@ export default function Navbar({ user, open, setOpen }: any) {
 
       <div className="flex items-center gap-4">
         <img
-          src={user?.photo ?? "/default-user.png"}
+          src={user?.photo || "https://res.cloudinary.com/ddmtiv1si/image/upload/v1765302029/turf_users/mgvs2qwq4lj8gnqd5hgp.jpg"}
+          onError={(e) => {
+            e.currentTarget.src = "https://res.cloudinary.com/ddmtiv1si/image/upload/v1765302029/turf_users/mgvs2qwq4lj8gnqd5hgp.jpg";
+          }}
           className="w-8 h-8 rounded-full border"
         />
       </div>
