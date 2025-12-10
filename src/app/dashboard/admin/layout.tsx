@@ -21,11 +21,8 @@ export default async function DashboardLayout({ children }: any) {
   const accessToken = await getCookie("adminAccess");
   const user = accessToken ? getUserFromToken(accessToken) : null;
 
-  console.log("dashboardUser", user);
-
   const role = mapRole(user?.role);
 
-  console.log("roleAdmin", role);
   return (
     <DashboardShell user={user} role={role}>
       {children}

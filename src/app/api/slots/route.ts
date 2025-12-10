@@ -9,7 +9,6 @@ export async function GET(request: Request) {
         const date = url.searchParams.get("date");
         if (!fieldId || !date) return NextResponse.json({ message: "Missing params" }, { status: 400 });
 
-        // Call your Node backend (serverFetch runs server-side)
         const res = await serverFetch.get(`booking/fields/${fieldId}/slots?date=${date}`);
         const json = await res.json();
 

@@ -10,8 +10,6 @@ export default async function TurfUserBookingsPage() {
   );
   const data = await res.json();
 
-  console.log("myBooking", data);
-
   const bookings =
     data?.data?.bookings?.map((b: any) => ({
       id: b.id,

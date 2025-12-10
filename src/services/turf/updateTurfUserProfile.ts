@@ -24,8 +24,6 @@ const updateTurfUserAction = async (_prev: any, formData: FormData) => {
 
         const data = await res.json();
 
-        console.log("profileUpdate", data)
-
         return data;
     } catch (error: any) {
         return {

@@ -1,26 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Bell } from "lucide-react";
-
-// export default function Navbar({ user }: any) {
-//   return (
-//     <header className="w-full border-b bg-white h-14 flex items-center px-4 justify-between">
-//       <div className="flex items-center gap-3">
-//         <h1 className="font-semibold">Welcome, {user?.name ?? "User"}</h1>
-//       </div>
-
-//       <div className="flex items-center gap-4">
-//         <Bell size={20} />
-//         <img
-//           src={user?.photo ?? "/default-user.png"}
-//           className="w-8 h-8 rounded-full border"
-//         />
-//       </div>
-//     </header>
-//   );
-// }
-
 export default function Navbar({ user, open, setOpen }: any) {
   return (
     <header className="w-full border-b bg-white h-14 flex items-center px-4 justify-between">

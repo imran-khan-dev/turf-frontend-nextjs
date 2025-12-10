@@ -22,8 +22,6 @@ export default function Sidebar({
 }: SidebarProps) {
   if (!role) return null;
 
-  console.log("ProfileSlug", turfProfileSlug)
-
   let items: SidebarItem[] = [];
 
   if (role === "turfUser" && turfProfileSlug) {

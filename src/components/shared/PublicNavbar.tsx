@@ -5,11 +5,10 @@ import { Menu } from "lucide-react";
 
 const PublicNavbar = () => {
   const navItems = [
-    { href: "#", label: "Home" },
-    { href: "#", label: "Services" },
-    { href: "#", label: "Features" },
-    { href: "#", label: "Contact" },
-    { href: "#", label: "FAQ" },
+    { href: "/", label: "Home" },
+    { href: "#features", label: "Features" },
+    { href: "#about", label: "About" },
+    { href: "#contact", label: "Contact" },
   ];
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur  dark:bg-background/95">

@@ -44,7 +44,7 @@ const TurfUserUpdateProfileForm: React.FC<TurfUserUpdateProfileForm> = ({
     if (state && !state.success && state.message) {
       toast.error(state.message);
     }
-    console.log("profileResult", state);
+
     if (state && state.success) {
       toast.success("Profile updated successfully!");
     }

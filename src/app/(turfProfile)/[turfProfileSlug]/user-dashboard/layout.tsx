@@ -22,7 +22,6 @@ export default async function DashboardLayout({ children, params }: any) {
   const accessToken = await getCookie("turfUserAccess");
   const user = accessToken ? getUserFromToken(accessToken) : null;
 
-  console.log("dashboardUser", user);
   const role = mapRole(user?.role);
 
   return (

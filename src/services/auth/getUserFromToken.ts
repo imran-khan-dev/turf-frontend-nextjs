@@ -21,7 +21,6 @@ export function getUserFromToken(token: string): AuthUser | null {
 
         if (!decoded || typeof decoded === "string") return null;
 
-        console.log("adminCheck", decoded)
         return {
             id: decoded.userId,
             email: decoded.email,

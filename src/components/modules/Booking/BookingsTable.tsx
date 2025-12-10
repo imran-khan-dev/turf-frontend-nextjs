@@ -50,13 +50,6 @@ export default function BookingsTable({ initialBookings }: Props) {
       </div>
     );
 
-  // const handlePayNow = (paymentId: string) => {
-  //   console.log("Redirect to payment for:", paymentId);
-
-  //   // Example:
-  //   // window.location.href = `/payment/${paymentId}`;
-  // };
-
   return (
     <div>
       {/* Filters */}

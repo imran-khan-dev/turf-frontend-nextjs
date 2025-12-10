@@ -33,7 +33,7 @@ const aboutItems = [
 
 const AboutUsCard = ({ item }: { item: typeof aboutItems[0] }) => {
   return (
-    <Card className="text-center overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <Card id="about" className="text-center overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <CardHeader className="bg-blue-50/50 flex justify-center">
         <Image
           src={item.image}
