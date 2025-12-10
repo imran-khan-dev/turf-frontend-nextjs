@@ -1,9 +1,9 @@
 import { Hero } from "@/components/modules/Home/Hero";
-import Specialities from "@/components/modules/Home/Specialties";
 import Steps from "@/components/modules/Home/Steps";
-import Testimonials from "@/components/modules/Home/Testimonials";
-import TopRatedDoctors from "@/components/modules/Home/TopRatedDoctors";
 import Head from "next/head";
+import AboutUs from "@/components/modules/Home/AboutUsCard";
+import Features from "@/components/modules/Home/Features";
+import ContactUs from "@/components/modules/Home/ContactUs";
 
 export default function Home() {
   return (
@@ -19,10 +19,10 @@ export default function Home() {
       </Head>
       <main>
         <Hero />
-        <Specialities />
-        <TopRatedDoctors />
+        <Features />
+        <AboutUs />
         <Steps />
-        <Testimonials />
+        <ContactUs />
       </main>
     </>
   );
