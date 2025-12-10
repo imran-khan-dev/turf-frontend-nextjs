@@ -1,4 +1,4 @@
-import TurfUserLoginForm from "@/components/modules/TurfUserAuth/TurfUserLoginForm";
+import TurfUserLoginForm from "@/components/modules/TurfUser/TurfUserLoginForm";
 
 const TurfUserLoginPage = async ({
   params,

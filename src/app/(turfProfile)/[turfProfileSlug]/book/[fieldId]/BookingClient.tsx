@@ -56,6 +56,8 @@ export default function BookingClient({ field }: any) {
         endISO: selectedSlot.endISO,
       };
 
+      console.log("bookingClientBody", body)
+
       const res = await fetch(`/api/booking`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,6 +65,7 @@ export default function BookingClient({ field }: any) {
       });
 
       const json = await res.json();
+      console.log("bookingClientRes", json)
 
       if (!res.ok) {
         setError(json.message || "Booking failed");

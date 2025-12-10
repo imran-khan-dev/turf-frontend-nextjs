@@ -32,22 +32,6 @@ export default async function BookingPage({
   const json = await res.json();
   const booking = json.data;
 
-  // const paymentId = booking?.payment?.id;
-
-  // const body = JSON.stringify({
-  //   paymentId: paymentId,
-  // });
-
-  // const payNowRes = await serverFetch.post(
-  //   `payment/make-payment`,
-  //   {
-  //     body,
-  //     headers: { "Content-Type": "application/json" },
-  //   },
-  //   "turfUserAccess"
-  // );
-
-  // const payNowLink = await payNowRes.json();
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -58,7 +42,6 @@ export default async function BookingPage({
       <p>
         Payment: <strong>{booking.paymentStatus}</strong>
       </p>
-      <p>Field: {booking.turfFieldName}</p>
       <p>Start: {new Date(booking.startTime).toLocaleString()}</p>
       <p>End: {new Date(booking.endTime).toLocaleString()}</p>
       <p>Amount: {booking.paymentAmount} ৳</p>

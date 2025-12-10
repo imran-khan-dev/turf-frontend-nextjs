@@ -12,7 +12,7 @@ export function getTokenTypeFromPath(pathname: string): string {
     const segments = pathname.split("/").filter(Boolean);
 
     // Turf user dashboard → /{slug}/user-dashboard
-    if (segments.length === 2 && segments[1] === "user-dashboard") {
+    if (segments.length >= 2 && segments[1] === "user-dashboard") {
         return ROLE_TOKEN_MAP.TURF_USER;
     }
 

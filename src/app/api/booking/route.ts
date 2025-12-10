@@ -6,6 +6,7 @@ import { getCookie } from "@/services/auth/tokenHandlers"; // if you need cookie
 export async function POST(request: Request) {
     try {
         const body = await request.json();
+        console.log("next aPi", body)
         // body: { turfProfileId, turfFieldId, startTimeISO, endTimeISO }
 
         // Optionally get token from cookie (server-side) to send to backend if needed:
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
         }, "turfUserAccess");
         const json = await res.json();
 
+        console.log("next apiresult", json)
         // forward whatever your backend returns (success,/data/message)
         return NextResponse.json(json, { status: res.status });
     } catch (err) {
