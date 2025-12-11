@@ -26,11 +26,23 @@ export default async function BookingPage({
 }) {
   const { bookingId } = await params;
 
+  
+
   const res = await serverFetch.get(`booking/get-booking/${bookingId}`); // adapt to your endpoint
-  if (!res.ok) return <div>Booking not found</div>;
+  // if (!res.ok) return <div>Booking not found</div>;
+  if (!res.ok) {
+    return (
+      <div className="max-w-3xl mx-auto p-6">
+        <h1 className="text-xl font-bold">
+          Bkash sandbox server temporarily unavailable, Try Again Later.
+        </h1>
+      </div>
+    );
+  }
+
+
   const json = await res.json();
   const booking = json.data;
-
 
   return (
     <div className="max-w-3xl mx-auto p-6">
