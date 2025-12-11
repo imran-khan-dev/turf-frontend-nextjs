@@ -26,6 +26,8 @@ export default async function BookingPage({
 }) {
   const { bookingId } = await params;
 
+  
+
   const res = await serverFetch.get(`booking/get-booking/${bookingId}`); // adapt to your endpoint
   // if (!res.ok) return <div>Booking not found</div>;
   if (!res.ok) {
@@ -37,6 +39,7 @@ export default async function BookingPage({
       </div>
     );
   }
+
 
   const json = await res.json();
   const booking = json.data;

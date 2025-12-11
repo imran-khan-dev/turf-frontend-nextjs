@@ -1,4 +1,4 @@
-import AdminLoginForm from "@/components/admin-login-form";
+import AdminLoginForm from "@/components/modules/Admin/AdminLoginForm";
 
 const AdminLoginPage = async ({
   searchParams,

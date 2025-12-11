@@ -1,44 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// import TurfUserRegisterForm from "@/components/modules/TurfUser/TurfUserRegistrationForm";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
-
-// const TurfUserRegisterPage = async ({
-//   params,
-// }: {
-//   params: { turfProfileSlug: string };
-// }) => {
-//   const resolvedParams = await params;
-//   return (
-//     <>
-//       <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-//         <div className="w-full max-w-xl">
-//           <Card>
-//             <CardHeader>
-//               <CardTitle>Create turf user account</CardTitle>
-//               <CardDescription>
-//                 Enter your information below to create your account
-//               </CardDescription>
-//             </CardHeader>
-//             <CardContent>
-//               <TurfUserRegisterForm
-//                 turfProfileSlug={resolvedParams.turfProfileSlug}
-//               />
-//             </CardContent>
-//           </Card>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default TurfUserRegisterPage;
-
 import TurfUserRegisterForm from "@/components/modules/TurfUser/TurfUserRegistrationForm";
 import {
   Card,
@@ -48,23 +7,32 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const TurfUserRegisterPage = ({ params }: any) => {
+const TurfUserRegisterPage = async ({
+  params,
+}: {
+  params: { turfProfileSlug: string };
+}) => {
+  const resolvedParams = await params;
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-xl">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create turf user account</CardTitle>
-            <CardDescription>
-              Enter your information below to create your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <TurfUserRegisterForm turfProfileSlug={params.turfProfileSlug} />
-          </CardContent>
-        </Card>
+    <>
+      <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <div className="w-full max-w-xl">
+          <Card>
+            <CardHeader>
+              <CardTitle>Create turf user account</CardTitle>
+              <CardDescription>
+                Enter your information below to create your account
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <TurfUserRegisterForm
+                turfProfileSlug={resolvedParams.turfProfileSlug}
+              />
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
