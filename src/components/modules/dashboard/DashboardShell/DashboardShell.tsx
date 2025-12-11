@@ -2,8 +2,8 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./Sidebar/Sidebar";
-import Navbar from "./Navbar/Navbar";
+import Sidebar from "../Sidebar/Sidebar";
+import Navbar from "../Navbar/Navbar";
 
 export default function DashboardShell({ user, role, children, turfProfileSlug = null }: any) {
   const [open, setOpen] = useState(false);

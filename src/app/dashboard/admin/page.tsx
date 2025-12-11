@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import StatsCards from "@/components/modules/Dashboard/StatsCards";
+import StatsCards from "@/components/modules/Dashboard/DashboardCards/StatsCards";
 import serverFetch from "@/lib/server-fetch";
 
 export default async function AdminDashboardPage() {

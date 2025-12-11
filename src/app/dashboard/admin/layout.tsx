@@ -1,4 +1,4 @@
-import DashboardShell from "@/components/modules/Dashboard/DashboardShell";
+import DashboardShell from "@/components/modules/Dashboard/DashboardShell/DashboardShell";
 import { getUserFromToken } from "@/services/auth/getUserFromToken";
 import { getCookie } from "@/services/auth/tokenHandlers";
 
